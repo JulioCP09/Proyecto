@@ -40,12 +40,17 @@ private:
 	Producto* tail;
 
 public:
+	//Constructor
 	ListaProductos();
+
+	//Métodos
 	void insertar();
 	void mostrar();
 	void buscar(int idBuscado);
 	void eliminar(int idEliminar);
 	void guardarArchivo();
 	void cargarArchivo();
+
+	//Destructor
 	~ListaProductos();
 };

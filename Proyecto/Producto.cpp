@@ -9,7 +9,6 @@ Producto::Producto(int _id, string _nombre, float _precio, int _stock)
 }
 #pragma endregion
 
-
 #pragma region Metodo Mostrar
 void Producto::mostrar()
 {
@@ -114,7 +113,7 @@ void ListaProductos::eliminar(int idEliminar)
 			if (actual == head) 
 			{
 				head = actual->getSiguiente();
-				if (head) 
+				if (head)
 				{
 					head->setAnterior(nullptr);
 				}
@@ -147,7 +146,7 @@ void ListaProductos::eliminar(int idEliminar)
 void ListaProductos::guardarArchivo()
 {
 	ofstream archivo("productos.txt");
-	if (!archivo) 
+	if (!archivo)
 	{
 		cout << "Error al abrir el archivo para guardar." << endl;
 		return;
@@ -180,7 +179,7 @@ void ListaProductos::cargarArchivo()
 		size_t p3 = linea.find(",", p2 + 1);
 
 		int id = stoi(linea.substr(0, p1));
-		string nombre = linea.substr(p1 + 1, p2 - p1 - 1);
+		string nombre = linea.substr(p1 + 1, p2 - p1 - 1); 
 		float precio = stod(linea.substr(p2 + 1, p3 - p2 - 1));
 		int stock = stoi(linea.substr(p3 + 1));
 
