@@ -165,7 +165,7 @@ void ListaPedidos::cargarArchivo()
 	ifstream archivo("pedidos.txt");
 	if (!archivo)
 	{
-		cout << "No se pudo abrir el archivo para cargar" << endl;
+		cout << "No se pudo abrir el archivo de pedidos para cargar" << endl;
 		return;
 	}
 

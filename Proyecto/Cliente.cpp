@@ -167,7 +167,7 @@ void ListaClientes::cargarArchivo()
 	ifstream archivo("clientes.txt");
 	if (!archivo)
 	{
-		cout << "No se pudo abrir el archivo para cargar" << endl;
+		cout << "No se pudo abrir el archivo de clientes para cargar" << endl;
 		return;
 	}
 

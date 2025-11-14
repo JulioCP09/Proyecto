@@ -2,7 +2,11 @@
 //
 
 #include <iostream>
+#include "Producto.h"
+#include "Cliente.h"
+#include "Pedido.h"
+#include "Pago.h"
 
-int main()
-{
-}
+using namespace std;
+
+
