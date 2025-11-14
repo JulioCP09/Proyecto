@@ -178,7 +178,7 @@ int main()
 
 		switch (opcion)
 		{
-		case1: menuProductos(productos);
+		case 1: menuProductos(productos);
 			break;
 		case 2: menuClientes(clientes);
 			break;
