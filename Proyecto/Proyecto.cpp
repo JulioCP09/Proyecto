@@ -2,6 +2,7 @@
 //
 
 #include <iostream>
+#include <fstream>
 #include "Producto.h"
 #include "Cliente.h"
 #include "Pedido.h"
@@ -187,6 +188,13 @@ int main()
 		case 4: menuPagos(pagos);
 			break;
 		case 5: cout << "Saliendo del programa" << endl;
+		{
+			ofstream f1("productos.txt", ios::trunc);
+			ofstream f2("clientes.txt", ios::trunc);
+			ofstream f3("pedidos.txt", ios::trunc);
+			ofstream f4("pagos.txt", ios::trunc);
+		}
+		cout << "Archivos limpiados" << endl;
 			break;
 		default: cout << "Opcion invalida, vuelva a intentar" << endl;
 		}
