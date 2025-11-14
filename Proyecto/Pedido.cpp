@@ -1,33 +1,33 @@
-#include "Cliente.h"
+#include "Pedido.h"
 #include <fstream>
 
 #pragma region Constructor
-Cliente::Cliente(int _id, string _nombre, string _correo, string _telefono)
-	: id(_id), nombre(_nombre), correo(_correo), telefono(_telefono)
+Pedido::Pedido(int _id, int _idCliente, int _idProducto, int _cantidad)
+	: id(_id), idCliente(_idCliente), idProducto(_idProducto), cantidad(_cantidad)
 {
 	siguiente = anterior = nullptr;
 }
 #pragma endregion
 
 #pragma region Metodo Mostrar
-void Cliente::mostrar()
+void Pedido::mostrar()
 {
-	cout << " ID: " << id 
-		<< " | Nombre: " << nombre
-		<< " | Correo: " << correo 
-		<< " | Telefono: " << telefono << endl;
+	cout << " ID Pedido: " << id 
+		<< " | ID Cliente: " << idCliente
+		<< " | ID Producto: " << idProducto 
+		<< " | Cantidad: " << cantidad << endl;
 }
 #pragma endregion
 
 #pragma region Metodo toFileString
-string Cliente::toFileString()
+string Pedido::toFileString()
 {
-	return to_string(id) + "," + nombre + "," + correo + "," + telefono;
+	return to_string(id) + "," + to_string(idCliente) + "," + to_string(idProducto) + "," + to_string(cantidad);
 }
 #pragma endregion
 
-#pragma region Constructor ListaClientes
-ListaClientes::ListaClientes()
+#pragma region Constructor ListaPedidos
+ListaPedidos::ListaPedidos()
 {
 	head = tail = nullptr;
 	cargarArchivo();
@@ -35,48 +35,45 @@ ListaClientes::ListaClientes()
 #pragma endregion
 
 #pragma region Metodo Insertar
-void ListaClientes::insertar()
+void ListaPedidos::insertar()
 {
-	int id;
-	string nombre, correo, telefono;
-
-	cout << "ID del cliente: " << endl;
+	int id, idCliente, idProducto, cantidad;
+	cout << "ID del pedido: " << endl;
 	cin >> id;
-	cin.ignore();
-	cout << "Nombre del cliente: " << endl;
-	getline(cin, nombre);
-	cout << "Correo del cliente: " << endl;
-	getline(cin, correo);
-	cout << "Telefono del cliente: " << endl;
-	getline(cin, telefono);
+	cout << "ID del cliente: " << endl;
+	cin >> idCliente;
+	cout << "ID del producto: " << endl;
+	cin >> idProducto;
+	cout << "Cantidad: " << endl;
+	cin >> cantidad;
 
-	Cliente* nuevo = new Cliente(id, nombre, correo, telefono);
-	if (!head) 
+	Pedido* nuevo = new Pedido(id, idCliente, idProducto, cantidad);
+	if (!head)
 	{
 		head = tail = nuevo;
 	}
-	else 
+	else
 	{
 		tail->setSiguiente(nuevo);
 		nuevo->setAnterior(tail);
 		tail = nuevo;
 	}
 
-	cout << "Cliente agregado exitosamente" << endl;
+	cout << "Pedido agregado exitosamente" << endl;
 	guardarArchivo();
 }
 #pragma endregion
 
 #pragma region Metodo Mostrar
-void ListaClientes::mostrar()
+void ListaPedidos::mostrar()
 {
 	if (!head)
 	{
-		cout << "No hay clientes registrados" << endl;
+		cout << "No hay pedidos registrados" << endl;
 		return;
 	}
-	cout << "Lista de Clientes:" << endl;
-	Cliente* actual = head;
+	cout << "Lista de Pedidos:" << endl;
+	Pedido* actual = head;
 	while (actual)
 	{
 		actual->mostrar();
@@ -86,27 +83,27 @@ void ListaClientes::mostrar()
 #pragma endregion
 
 #pragma region Metodo Buscar
-void ListaClientes::buscar(int idBuscado)
+void ListaPedidos::buscar(int idBuscado)
 {
-	Cliente* actual = head;
+	Pedido* actual = head;
 	while (actual)
 	{
 		if (actual->getId() == idBuscado)
 		{
-			cout << "Cliente encontrado: " << endl;
+			cout << "Pedido encontrado:" << endl;
 			actual->mostrar();
 			return;
 		}
 		actual = actual->getSiguiente();
 	}
-	cout << "Cliente no encontrado" << endl;
+	cout << "Pedido no encontrado" << endl;
 }
 #pragma endregion
 
 #pragma region Metodo Eliminar
-void ListaClientes::eliminar(int idEliminar)
+void ListaPedidos::eliminar(int idEliminar)
 {
-	Cliente* actual = head;
+	Pedido* actual = head;
 	while (actual)
 	{
 		if (actual->getId() == idEliminar)
@@ -114,7 +111,7 @@ void ListaClientes::eliminar(int idEliminar)
 			if (actual == head)
 			{
 				head = actual->getSiguiente();
-				if (head)
+				if (head) 
 				{
 					head->setAnterior(nullptr);
 				}
@@ -133,25 +130,26 @@ void ListaClientes::eliminar(int idEliminar)
 				actual->getSiguiente()->setAnterior(actual->getAnterior());
 			}
 			delete actual;
-			cout << "Cliente eliminado correctamente" << endl;
+			cout << "Pedido eñiminado correctamente" << endl;
+			guardarArchivo();
 			return;
 		}
 		actual = actual->getSiguiente();
 	}
-	cout << "Cliente no encontrado" << endl;
+	cout << "Pedido no encontrado" << endl;
 }
 #pragma endregion
 
 #pragma region Metodo GuardarArchivo
-void ListaClientes::guardarArchivo()
+void ListaPedidos::guardarArchivo()
 {
-	ofstream archivo("clientes.txt");
+	ofstream archivo("pedidos.txt");
 	if (!archivo)
 	{
 		cout << "Error al abrir el archivo para guardar." << endl;
 		return;
 	}
-	Cliente* actual = head;
+	Pedido* actual = head;
 	while (actual)
 	{
 		archivo << actual->toFileString() << endl;
@@ -162,9 +160,9 @@ void ListaClientes::guardarArchivo()
 #pragma endregion
 
 #pragma region Metodo CargarArchivo
-void ListaClientes::cargarArchivo()
+void ListaPedidos::cargarArchivo()
 {
-	ifstream archivo("clientes.txt");
+	ifstream archivo("pedidos.txt");
 	if (!archivo)
 	{
 		cout << "No se pudo abrir el archivo para cargar" << endl;
@@ -172,18 +170,18 @@ void ListaClientes::cargarArchivo()
 	}
 
 	string linea;
-	while (getline(archivo, linea))
+	while (getline(archivo,linea))
 	{
 		size_t p1 = linea.find(",");
 		size_t p2 = linea.find(",", p1 + 1);
 		size_t p3 = linea.find(",", p2 + 1);
 
 		int id = stoi(linea.substr(0, p1));
-		string nombre = linea.substr(p1 + 1, p2 - p1 - 1);
-		string correo = linea.substr(p2 + 1, p3 - p2 - 1);
-		string telefono = linea.substr(p3 + 1);
+		int idCliente = stoi(linea.substr(p1 + 1, p2 - p1 - 1));
+		int idProducto = stoi(linea.substr(p2 + 1, p3 - p2 - 1));
+		int cantidad = stoi(linea.substr(p3 + 1));
 
-		Cliente* nuevo = new Cliente(id, nombre, correo, telefono);
+		Pedido* nuevo = new Pedido(id, idCliente, idProducto, cantidad);
 		if (!head)
 		{
 			head = tail = nuevo;
@@ -200,12 +198,12 @@ void ListaClientes::cargarArchivo()
 #pragma endregion
 
 #pragma region Destructor
-ListaClientes::~ListaClientes()
+ListaPedidos::~ListaPedidos()
 {
-	Cliente* actual = head;
+	Pedido* actual = head;
 	while (actual)
 	{
-		Cliente* sig = actual->getSiguiente();
+		Pedido* sig = actual->getSiguiente();
 		delete actual;
 		actual = sig;
 	}

@@ -12,8 +12,10 @@ Producto::Producto(int _id, string _nombre, float _precio, int _stock)
 #pragma region Metodo Mostrar
 void Producto::mostrar()
 {
-	cout << "ID: " << id << " | Nombre: " << nombre 
-		<< " | Precio: " << precio << " | Stock: " << stock << endl;
+	cout << "ID: " << id 
+		<< " | Nombre: " << nombre 
+		<< " | Precio: " << precio 
+		<< " | Stock: " << stock << endl;
 }
 #pragma endregion
 
