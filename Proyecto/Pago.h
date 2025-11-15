@@ -23,6 +23,7 @@ public:
 	string toFileString();
 
 	int getId() const { return id; }
+	float getMonto() const { return monto; }
 	Pago* getSiguiente() const { return siguiente; }
 	Pago* getAnterior() const { return anterior; }
 	void setSiguiente(Pago* sig) { siguiente = sig; }
@@ -46,6 +47,11 @@ public:
 	void eliminar(int idEliminar);
 	void guardarArchivo();
 	void cargarArchivo();
+
+	//Metodos de la segunda parte
+	void cantidadTotalPagos();
+	void montoTotalPagos();
+	void promedioPagos();
 
 	//Destructor
 	~ListaPagos();

@@ -132,7 +132,10 @@ void menuPagos(ListaPagos& pagos)
 		cout << "2. Mostrar Pagos" << endl;
 		cout << "3. Buscar Pago" << endl;
 		cout << "4. Eliminar Pago" << endl;
-		cout << "5. Volver al menu principal" << endl;
+		cout << "5. Cantidad total de pagos" << endl;
+		cout << "6. Monto total de los pagos" << endl;
+		cout << "7. Promedio de los pagos" << endl;
+		cout << "8. Volver al menu principal" << endl;
 		cout << "Seleccione una opcion: " << endl;
 		cin >> opcion;
 
@@ -150,11 +153,17 @@ void menuPagos(ListaPagos& pagos)
 			cin >> id;
 			pagos.eliminar(id);
 			break;
-		case 5: cout << "Regresando al menu principal" << endl;
+		case 5: pagos.cantidadTotalPagos();
+			break;
+		case 6: pagos.montoTotalPagos();
+			break;
+		case 7: pagos.promedioPagos();
+			break;
+		case 8: cout << "Regresando al menu principal" << endl;
 			break;
 		default: cout << "Opcion invalida, vuelva a intentar" << endl;
 		}
-	} while (opcion != 5);
+	} while (opcion != 8);
 }
 #pragma endregion
 

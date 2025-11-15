@@ -199,7 +199,7 @@ void ListaClientes::cargarArchivo()
 }
 #pragma endregion
 
-#pragma region Destructor
+#pragma region Destructor ListaClientes
 ListaClientes::~ListaClientes()
 {
 	Cliente* actual = head;

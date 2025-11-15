@@ -201,7 +201,58 @@ void ListaPagos::cargarArchivo()
 }
 #pragma endregion
 
-#pragma region Destructor
+#pragma region Metodo cantidadTotalPagos
+void ListaPagos::cantidadTotalPagos()
+{
+	int contador = 0;
+	Pago* actual = head;
+	while (actual)
+	{
+		contador++;
+		actual = actual->getSiguiente();
+	}
+	cout << "Cantidad total de pagos: " << contador << endl;
+}
+#pragma endregion
+
+#pragma region Metodo montoTotalPagos
+void ListaPagos::montoTotalPagos()
+{
+	float total = 0;
+	Pago* actual = head;
+	while(actual)
+	{
+		total += actual->getMonto();
+		actual = actual->getSiguiente();
+	}
+	cout << "Monto total de los pagos registrados: " << total << endl;
+}
+#pragma endregion
+
+#pragma region Metodo promedioPagos
+void ListaPagos::promedioPagos()
+{
+	float total = 0;
+	int contador = 0;
+	Pago* actual = head;
+	while (actual)
+	{
+		total += actual->getMonto();
+		contador++;
+		actual = actual->getSiguiente();
+	}
+
+	if (contador == 0)
+	{
+		cout << "No hay pagos registrados" << endl;
+		return;
+	}
+
+	cout << "Promedio de los pagos realisados: " << (total / contador) << endl;
+}
+#pragma endregion
+
+#pragma region Destructor ListaPagos
 ListaPagos::~ListaPagos()
 {
 	Pago* actual = head;

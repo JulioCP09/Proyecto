@@ -197,7 +197,7 @@ void ListaPedidos::cargarArchivo()
 }
 #pragma endregion
 
-#pragma region Destructor
+#pragma region Destructor ListaPedidos
 ListaPedidos::~ListaPedidos()
 {
 	Pedido* actual = head;
